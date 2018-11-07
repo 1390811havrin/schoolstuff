@@ -4,7 +4,7 @@
 #include "AdvisingDBAbstraction.h"
 using namespace std;
 
-class GUI: public AdvisingDBAbstraction
+class GUI
 {
 
 public:
@@ -13,25 +13,25 @@ public:
 
 	void createTables(string pathToFile);
 
-	bool decipherChoice(int choice);
+	bool decipherChoice(int choice, AdvisingDBAbstraction &adb);
 
-	bool addAStudent();
+	bool addAStudent(AdvisingDBAbstraction &adb);
 
-	bool addACourse();
+	bool addACourse(AdvisingDBAbstraction &adb);
 
-	bool addAAdvisor();
+	bool addAAdvisor(AdvisingDBAbstraction &adb);
 
-	bool listStudents();
+	bool listStudents(AdvisingDBAbstraction &adb);
 
-	bool viewPlan();
+	bool viewPlan(AdvisingDBAbstraction &adb);
 
-	bool deletePlan();
+	bool deletePlan(AdvisingDBAbstraction &adb);
 
-	bool convertPlanToCourses();
+	bool convertPlanToCourses(AdvisingDBAbstraction &adb);
 
-	bool makeAPlan();
+	bool makeAPlan(AdvisingDBAbstraction &adb);
 
-	bool listAllExistingPlansByName();
+	bool listAllExistingPlansByName(AdvisingDBAbstraction &adb);
 
 	string printLoginScreen();
 

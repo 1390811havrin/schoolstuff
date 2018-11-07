@@ -24,7 +24,7 @@
     <ClInclude Include="Headers\GUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\sqlite-amalgamation-3250200\sqlite3.h">
+    <ClInclude Include="..\..\..\sqlite-amalgamation-3250300\sqlite3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClCompile Include="ClassFolder\GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\sqlite-amalgamation-3250200\sqlite3.c">
+    <ClCompile Include="..\..\..\sqlite-amalgamation-3250300\sqlite3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

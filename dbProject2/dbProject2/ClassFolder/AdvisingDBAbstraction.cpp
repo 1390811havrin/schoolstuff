@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "C:\Users\David\Desktop\School\schoolstuff\dbProject2\dbProject2\Headers\AdvisingDBAbstraction.h"
+#include "C:\Users\David H\Desktop\school\schoolstuff\dbProject2\dbProject2\Headers\AdvisingDBAbstraction.h"
 
 using namespace std;
 
@@ -332,10 +332,10 @@ void AdvisingDBAbstraction::listStudents()
 
 			while (statusOfStep == SQLITE_ROW)
 			{
-				int st_id(sqlite3_column_int(myStatement, 1));
-				string firstName((char*)sqlite3_column_text(myStatement, 2));
-				string lastName((char*)sqlite3_column_text(myStatement, 3));
-				cout << st_id << ". " << firstName << lastName << endl;
+				int st_id(sqlite3_column_int(myStatement, 0));
+				string firstName((char*)sqlite3_column_text(myStatement, 1));
+				string lastName((char*)sqlite3_column_text(myStatement, 2));
+				cout << "Student ID: " <<st_id << " First name:  " << firstName << " Last Name: " << lastName << endl;
 			
 				statusOfStep = sqlite3_step(myStatement);
 			}

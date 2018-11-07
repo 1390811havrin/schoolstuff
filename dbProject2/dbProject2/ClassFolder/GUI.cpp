@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include "C:\Users\David\Desktop\School\schoolstuff\dbProject2\dbProject2\Headers\GUI.h"
-#include "C:\Users\David\Desktop\School\schoolstuff\dbProject2\dbProject2\Headers\AdvisingDBAbstraction.h"
+#include "C:\Users\David H\Desktop\school\schoolstuff\dbProject2\dbProject2\Headers\GUI.h"
+#include "C:\Users\David H\Desktop\school\schoolstuff\dbProject2\dbProject2\Headers\AdvisingDBAbstraction.h"
 
 GUI::GUI()
 {
@@ -18,53 +18,53 @@ void GUI::createTables(string pathToFile)
 	AdvisingDBAbstraction adb(pathToFile);
 }
 
-bool GUI:: decipherChoice(int choice)
+bool GUI:: decipherChoice(int choice, AdvisingDBAbstraction &adb)
 {
 	if (choice == 1)
 	{
 		//add a student
-		return addAStudent();
+		return addAStudent(adb);
 	}
 	else if (choice == 2)
 	{
 		//add a course
-		return addACourse();
+		return addACourse(adb);
 	}
 
 	else if (choice == 3)
 	{
 		//add a advisor
-		return addAAdvisor();
+		return addAAdvisor(adb);
 	}
 	else if (choice == 4)
 	{
 		//list students
-		return listStudents();
+		return listStudents(adb);
 	}
 	else if (choice == 5)
 	{
 		//view plan
-		return viewPlan();
+		return viewPlan(adb);
 	}
 	else if (choice == 6)
 	{
 		//delete plan
-		return deletePlan();
+		return deletePlan(adb);
 	}
 	else if (choice == 7)
 	{
 		//convert plan to course
-		return convertPlanToCourses();
+		return convertPlanToCourses(adb);
 	}
 	else if (choice == 8)
 	{
 		//make a plan
-		return makeAPlan();
+		return makeAPlan(adb);
 	}
 	else if (choice == 9)
 	{
 		//list all existing plans by name
-		return listAllExistingPlansByName();
+		return listAllExistingPlansByName(adb);
 	}
 	else if (choice == 0)
 	{
@@ -74,7 +74,7 @@ bool GUI:: decipherChoice(int choice)
 	return true;
 }
 
-bool GUI:: addAStudent()
+bool GUI:: addAStudent(AdvisingDBAbstraction &adb)
 {
 	int stdID = -1;
 	string fname;
@@ -85,7 +85,7 @@ bool GUI:: addAStudent()
 	cin >> lname;
 	cout << "Please Enter In ST_ID if you don't yet have one for the student enter in a negative number and one will be assigned to him automatically: " << endl;
 	cin >> stdID;
-	AdvisingDBAbstraction adb;
+
 	if(stdID >= 0)
 	adb.insertStudent(fname, lname, stdID);
 	if (stdID < 0)
@@ -94,12 +94,15 @@ bool GUI:: addAStudent()
 	return true;
 }
 
-bool GUI:: addACourse()
+bool GUI:: addACourse(AdvisingDBAbstraction &adb)
 {
+
+
+
 	return true;
 }
 
-bool GUI::addAAdvisor()
+bool GUI::addAAdvisor(AdvisingDBAbstraction &adb)
 {
 	int stdID = -1;
 	string fname;
@@ -110,7 +113,7 @@ bool GUI::addAAdvisor()
 	cin >> lname;
 	cout << "Please Enter In AD_ID if you don't yet have one for the advisor enter in a negative number and one will be assigned to him automatically: " << endl;
 	cin >> stdID;
-	AdvisingDBAbstraction adb;
+
 	if (stdID >= 0)
 		adb.insertAdvisor(fname, lname, stdID);
 	if (stdID < 0)
@@ -119,34 +122,52 @@ bool GUI::addAAdvisor()
 	return true;
 }
 
-bool GUI::listStudents()
+bool GUI::listStudents(AdvisingDBAbstraction &adb)
 {
+	adb.listStudents();
+
+	return true;
+}
+
+bool GUI::viewPlan(AdvisingDBAbstraction &adb)
+{
+	int stdID = -1;
+	string fname;
+	string lname;
+	cout << " Please Enter In Name Of Plan: " << endl;
+	cin >> fname;
+	cout << "Please Enter In : " << endl;
+	cin >> lname;
+	cout << "Please Enter In ST_ID if you don't yet have one for the student enter in a negative number and one will be assigned to him automatically: " << endl;
+	cin >> stdID;
+
+	if (stdID >= 0)
+		adb.insertStudent(fname, lname, stdID);
+	if (stdID < 0)
+		adb.insertStudent(fname, lname);
+
+	return true;
 
 
 	return true;
 }
 
-bool GUI::viewPlan()
+bool GUI::deletePlan(AdvisingDBAbstraction &adb)
 {
 	return true;
 }
 
-bool GUI::deletePlan()
+bool GUI::convertPlanToCourses(AdvisingDBAbstraction &adb)
 {
 	return true;
 }
 
-bool GUI::convertPlanToCourses()
+bool GUI::makeAPlan(AdvisingDBAbstraction &adb)
 {
 	return true;
 }
 
-bool GUI::makeAPlan()
-{
-	return true;
-}
-
-bool GUI:: listAllExistingPlansByName()
+bool GUI:: listAllExistingPlansByName(AdvisingDBAbstraction &adb)
 {
 	return true;
 }
