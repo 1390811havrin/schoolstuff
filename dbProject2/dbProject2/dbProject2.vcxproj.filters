@@ -15,34 +15,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DBAbstraction.h">
+    <ClInclude Include="Headers\AdvisingDBAbstraction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AdvisingDBAbstraction.h">
+    <ClInclude Include="Headers\DBAbstraction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GUI.h">
+    <ClInclude Include="Headers\GUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\Desktop\school\sqlite-amalgamation-3250300\sqlite3.h">
+    <ClInclude Include="..\..\..\sqlite-amalgamation-3250200\sqlite3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dbProject2.cpp">
+    <ClCompile Include="ClassFolder\AdvisingDBAbstraction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DBAbstraction.cpp">
+    <ClCompile Include="ClassFolder\DBAbstraction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AdvisingDBAbstraction.cpp">
+    <ClCompile Include="ClassFolder\dbProject2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GUI.cpp">
+    <ClCompile Include="ClassFolder\GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Desktop\school\sqlite-amalgamation-3250300\sqlite3.c">
+    <ClCompile Include="..\..\..\sqlite-amalgamation-3250200\sqlite3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
   </ItemGroup>
 </Project>

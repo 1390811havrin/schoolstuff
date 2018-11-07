@@ -91,7 +91,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Users\David H\Desktop\school\sqlite-amalgamation-3250300</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\David\Desktop\School\sqlite-amalgamation-3250200</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,17 +152,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Desktop\school\sqlite-amalgamation-3250300\sqlite3.h" />
-    <ClInclude Include="AdvisingDBAbstraction.h" />
-    <ClInclude Include="DBAbstraction.h" />
-    <ClInclude Include="GUI.h" />
+    <ClInclude Include="..\..\..\sqlite-amalgamation-3250200\sqlite3.h" />
+    <ClInclude Include="Headers\AdvisingDBAbstraction.h" />
+    <ClInclude Include="Headers\DBAbstraction.h" />
+    <ClInclude Include="Headers\GUI.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Desktop\school\sqlite-amalgamation-3250300\sqlite3.c" />
-    <ClCompile Include="AdvisingDBAbstraction.cpp" />
-    <ClCompile Include="DBAbstraction.cpp" />
-    <ClCompile Include="dbProject2.cpp" />
-    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="..\..\..\sqlite-amalgamation-3250200\sqlite3.c" />
+    <ClCompile Include="ClassFolder\AdvisingDBAbstraction.cpp" />
+    <ClCompile Include="ClassFolder\DBAbstraction.cpp" />
+    <ClCompile Include="ClassFolder\dbProject2.cpp" />
+    <ClCompile Include="ClassFolder\GUI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
