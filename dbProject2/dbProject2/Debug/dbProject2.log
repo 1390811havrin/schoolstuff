@@ -1,2 +1,3 @@
-﻿  AdvisingDBAbstraction.cpp
+﻿  dbProject2.cpp
+c:\users\david h\desktop\school\schoolstuff\dbproject2\dbproject2\classfolder\dbproject2.cpp(56): warning C4101: 'sf': unreferenced local variable
   dbProject2.vcxproj -> C:\Users\David H\Desktop\school\schoolstuff\dbProject2\Debug\dbProject2.exe

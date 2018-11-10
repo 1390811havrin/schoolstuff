@@ -1,4 +1,8 @@
-Alright so your problem here is that you are having to instantiate a new db object for each command.
-That isn't acceptable.
-So solution 1 you throw out GUI and just do everything in .cpp
-Option 2 is you find out how to pass the AdvisingDBAbstraction object and create it once in main then just pass it to everything that needs it.
+Hello Professor Mahoney,
+
+
+To run this code on your machine you will need to change
+> The includes in all the files
+> The db string path
+> The amalgamation file location under properties->c++->general->additional directories
+> The sqlite3.c and sqlite3.h file includes under project add existing item.

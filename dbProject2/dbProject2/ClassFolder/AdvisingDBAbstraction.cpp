@@ -15,6 +15,7 @@ AdvisingDBAbstraction::AdvisingDBAbstraction(string pathToFile): DBAbstraction(p
 	createCoursesHavePrerequisites();
 	createCoursesMakeUpPlansTable();
 	createStudentsHaveTakenCourses();
+	indexPlansTable();
 }
 
 
@@ -99,13 +100,21 @@ void AdvisingDBAbstraction::createCoursesHavePrerequisites()
 	}
 
 }
+void AdvisingDBAbstraction::indexPlansTable()
+{
+	string sql = "CREATE INDEX if not exists idx_sem_year ON plans (semester, numYear);";
+		if (!executeQueryNoResultsBack(sql))
+		{
+			cout << "Error creating index" << endl;
+		}
+}
 #pragma endregion
 
 
 #pragma region LargeScaleInserts
 void AdvisingDBAbstraction::insertStudent(string f_name, string l_name, int st_id)
 {
-	string sql = "Insert into Students (f_name, l_name, ST_ID) Values (?, ?, ?);";
+	string sql = "Insert or replace into Students (f_name, l_name, ST_ID) Values (?, ?, ?);";
 	sqlite3_stmt* mystatement;
 	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
 	if (statusofPrep == SQLITE_OK)
@@ -122,7 +131,7 @@ void AdvisingDBAbstraction::insertStudent(string f_name, string l_name, int st_i
 
 void AdvisingDBAbstraction::insertStudent(string f_name, string l_name)
 {
-	string sql = "Insert into Students (f_name, l_name) Values (?, ?);";
+	string sql = "Insert into (f_name, l_name) Values (?, ?);";
 	sqlite3_stmt* mystatement;
 	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
 	if (statusofPrep == SQLITE_OK)
@@ -141,7 +150,7 @@ void AdvisingDBAbstraction::insertStudent(string f_name, string l_name)
 
 void AdvisingDBAbstraction::insertAdvisor(string f_name, string l_name, int ad_id)
 {
-	string sql = "Insert into Advisors (f_name, l_name, AD_ID) Values (?, ?, ?);";
+	string sql = "Insert or replace into Advisors (f_name, l_name, AD_ID) Values (?, ?, ?);";
 	sqlite3_stmt* mystatement;
 	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
 	if (statusofPrep == SQLITE_OK)
@@ -160,7 +169,7 @@ void AdvisingDBAbstraction::insertAdvisor(string f_name, string l_name, int ad_i
 
 void AdvisingDBAbstraction::insertAdvisor(string f_name, string l_name)
 {
-	string sql = "Insert into Advisors (f_name, l_name) Values (?, ?);";
+	string sql = "Insert  into Advisors (f_name, l_name) Values (?, ?);";
 	sqlite3_stmt* mystatement;
 	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
 	if (statusofPrep == SQLITE_OK)
@@ -180,7 +189,7 @@ void AdvisingDBAbstraction::insertAdvisor(string f_name, string l_name)
 
 void AdvisingDBAbstraction::insertCourses(int c_id, string cname, string cnumber, int credNum, int req)
 {
-	string sql = "Insert into Courses (C_ID, CName, CNumber, CredNum, Required) Values (?, ?, ?, ?, ?);";
+	string sql = "Insert or replace into Courses (C_ID, CName, CNumber, CredNum, Required) Values (?, ?, ?, ?, ?);";
 	sqlite3_stmt* mystatement;
 	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
 	if (statusofPrep == SQLITE_OK)
@@ -221,7 +230,7 @@ void AdvisingDBAbstraction::insertCourses(string cname, string cnumber, int cred
 
 void AdvisingDBAbstraction::insertPlans(string name, int year, int semester, int p_id, int ad_id, int st_id)
 {
-	string sql = "Insert into Plans (name, NumYear, semester, P_ID, AD_ID, ST_ID) Values (?, ?, ?, ?, ?, ?);";
+	string sql = "Insert or replace into Plans (name, NumYear, semester, P_ID, AD_ID, ST_ID) Values (?, ?, ?, ?, ?, ?);";
 	sqlite3_stmt* mystatement;
 	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
 	if (statusofPrep == SQLITE_OK)
@@ -265,7 +274,7 @@ void AdvisingDBAbstraction::insertPlans(string name, int year, int semester, int
 
 void AdvisingDBAbstraction::insertCoursesHavePrereqs(int c_id, int prereq)
 {
-	string sql = "Insert into CoursesHavePrereqs (C_ID, Prereq) Values (?, ?);";
+	string sql = "Insert or replace into CoursesHavePrereqs (C_ID, Prereq) Values (?, ?);";
 	sqlite3_stmt* mystatement;
 	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
 	if (statusofPrep == SQLITE_OK)
@@ -285,7 +294,7 @@ void AdvisingDBAbstraction::insertCoursesHavePrereqs(int c_id, int prereq)
 
 void AdvisingDBAbstraction::insertStudentsHaveTakenCourses(int st_id, int c_id)
 {
-	string sql = "Insert into StudentsHaveTakenCourses (ST_ID, C_ID) Values (?, ?);";
+	string sql = "Insert or replace into StudentsHaveTakenCourses (ST_ID, C_ID) Values (?, ?);";
 	sqlite3_stmt* mystatement;
 	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
 	if (statusofPrep == SQLITE_OK)
@@ -303,7 +312,7 @@ void AdvisingDBAbstraction::insertStudentsHaveTakenCourses(int st_id, int c_id)
 
 void AdvisingDBAbstraction::insertCoursesMakeUpPlans(int p_id, int c_id)
 {
-	string sql = "Insert into CoursesMakeUpPlans (P_ID, C_ID) Values (?, ?);";
+	string sql = "Insert or replace into CoursesMakeUpPlans (P_ID, C_ID) Values (?, ?);";
 	sqlite3_stmt* mystatement;
 	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
 	if (statusofPrep == SQLITE_OK)
@@ -321,6 +330,8 @@ void AdvisingDBAbstraction::insertCoursesMakeUpPlans(int p_id, int c_id)
 }
 
 #pragma endregion
+
+
 #pragma region gets
 void AdvisingDBAbstraction::listStudents()
 {
@@ -352,12 +363,12 @@ void AdvisingDBAbstraction::listPlans()
 
 		while (statusOfStep == SQLITE_ROW)
 		{
-			int p_id(sqlite3_column_int(myStatement, 1));
-			int year(sqlite3_column_int(myStatement, 2));
-			int semester(sqlite3_column_int(myStatement, 3));
-			string name((char*)sqlite3_column_text(myStatement, 4));
-			int ad_id(sqlite3_column_int(myStatement, 5));
-			int st_id(sqlite3_column_int(myStatement, 6));
+			int p_id(sqlite3_column_int(myStatement, 0));
+			int year(sqlite3_column_int(myStatement, 1));
+			int semester(sqlite3_column_int(myStatement, 2));
+			string name((char*)sqlite3_column_text(myStatement, 3));
+			int ad_id(sqlite3_column_int(myStatement, 4));
+			int st_id(sqlite3_column_int(myStatement, 5));
 			cout << "P_ID: " << p_id << " Year: " << year << " Semester: " << semester << " Name: " << name << " ADID: "  << ad_id << " ST_ID: " << st_id << endl;
 
 			statusOfStep = sqlite3_step(myStatement);
@@ -366,6 +377,33 @@ void AdvisingDBAbstraction::listPlans()
 	}
 
 }
+
+void AdvisingDBAbstraction::listPlans(int p_id)
+{
+	string sql = "Select distinct Courses.CName, Courses.CNumber, Courses.C_ID, Courses.CredNum, Courses.Required from Plans, CoursesMakeUpPlans, Courses where Courses.C_ID = CoursesMakeUpPlans.C_ID and CoursesMakeUpPlans.P_ID = ";
+	sql = sql + to_string(p_id);
+	sql = sql + ";";
+	sqlite3_stmt* myStatement;
+	if (prepareQueryWithResults(sql, myStatement))
+	{
+		int statusOfStep = sqlite3_step(myStatement);
+
+		while (statusOfStep == SQLITE_ROW)
+		{
+			string courseName((char*)sqlite3_column_text(myStatement, 0));
+			string courseNumber((char*)sqlite3_column_text(myStatement, 1));
+			int semester(sqlite3_column_int(myStatement, 2));
+			int ad_id(sqlite3_column_int(myStatement, 3));
+			int st_id(sqlite3_column_int(myStatement, 4));
+			cout << "CourseName: " << courseName << " CourseNumber: " << courseNumber << " Courses C_ID: " << semester << " NumberOfCredits: " << ad_id << " Required: " << st_id << endl;
+
+			statusOfStep = sqlite3_step(myStatement);
+		}
+		sqlite3_finalize(myStatement);
+	}
+
+}
+
 void AdvisingDBAbstraction::listCourses()
 {
 	string sql = "Select C_ID, CName, CNumber, CredNum, Required from Courses;";
@@ -399,6 +437,29 @@ void AdvisingDBAbstraction::listCourses()
 
 
 }
+void AdvisingDBAbstraction::listCoursesAStudentCanTake(int st_id)
+{
+	string sql2 = " except Select StudentsHaveTakenCourses.C_ID from StudentsHaveTakenCourses where StudentsHaveTakenCourses.ST_ID = ";
+	string sql = "Select Courses.C_ID from Courses except select CoursesHavePrereqs.C_ID from CoursesHavePrereqs union Select CoursesHavePrereqs.C_ID as coursesYouHavePrereqsFor from CoursesHavePrereqs, StudentsHaveTakenCourses where StudentsHaveTakenCourses.C_ID = CoursesHavePrereqs.Prereq and StudentsHaveTakenCourses.ST_ID = ";
+	sql = sql + to_string(st_id);
+	sql = sql + sql2;
+	sql = sql + to_string(st_id);
+	
+	sqlite3_stmt* myStatement;
+
+	if (prepareQueryWithResults(sql, myStatement))
+	{
+		int statusOfStep = sqlite3_step(myStatement);
+
+		while (statusOfStep == SQLITE_ROW)
+		{
+			int c_id(sqlite3_column_int(myStatement, 0));
+			cout << "CourseID: " << c_id << endl;
+			statusOfStep = sqlite3_step(myStatement);
+		}
+		sqlite3_finalize(myStatement);
+	}
+}
 void AdvisingDBAbstraction::listAdvisors()
 {
 	string sql = "Select AD_ID, f_Name, l_Name from Advisors;";
@@ -421,5 +482,130 @@ void AdvisingDBAbstraction::listAdvisors()
 
 }
 
+void AdvisingDBAbstraction::convertPlanToCourses(int p_id, int st_id)
+{
+	bool done = false;
+
+	sqlite3_exec(db, "BEGIN TRANSACTION;", NULL, NULL, NULL);
+
+	while (done == false)
+	{
+		if (getCourseIDsFromPlan(p_id) == 0)
+		{
+			done = true;
+		}
+		else
+		{
+			insertStudentsHaveTakenCourses(st_id, getCourseIDsFromPlan(p_id));
+			deleteCourseFromPlan(p_id, getCourseIDsFromPlan(p_id));
+		}
+	}
+	deletePlanHalfTheJob(p_id);
+	sqlite3_exec(db, "END TRANSACTION;", NULL, NULL, NULL);
+
+
+}
+
+int AdvisingDBAbstraction::getCourseIDsFromPlan(int p_id)
+{
+	int c_id;
+
+	string sql = "Select CoursesMakeUpPlans.C_ID from CoursesMakeUpPlans where CoursesMakeUpPlans.P_ID = ";
+	sql = sql + to_string(p_id);
+	sql = sql + " limit 1";
+	sqlite3_stmt* myStatement;
+	if (prepareQueryWithResults(sql, myStatement))
+	{
+		int statusOfStep = sqlite3_step(myStatement);
+
+		while (statusOfStep == SQLITE_ROW)
+		{
+
+			int ad_id(sqlite3_column_int(myStatement, 3));
+			c_id = ad_id;
+			statusOfStep = sqlite3_step(myStatement);
+		}
+		sqlite3_finalize(myStatement);
+	}
+
+
+
+	return c_id;
+}
+
+void AdvisingDBAbstraction::deleteCourseFromPlan(int p_id, int c_id)
+{
+	string sql = "Delete from CoursesMakeUpPlans where p_id =";
+	sql = sql + to_string(p_id);
+	sql = sql + " and c_id =";
+	sql = sql + to_string(c_id);
+
+	sqlite3_stmt* mystatement;
+	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
+	if (statusofPrep == SQLITE_OK)
+	{
+		if (!executeQueryNoResultsBack(mystatement))
+		{
+			cout << "Error in deletion1" << endl;
+		}
+	}
+
+
+}
+
+
+
 #pragma endregion
 
+void AdvisingDBAbstraction::deletePlan(int p_id)
+{
+	string sql = "Delete from CoursesMakeUpPlans where p_id =";
+	sql = sql + to_string(p_id);
+	sql = sql + ";";
+
+
+
+	sqlite3_stmt* mystatement;
+	int statusofPrep = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement, NULL);
+	if (statusofPrep == SQLITE_OK)
+	{
+		if (!executeQueryNoResultsBack(mystatement))
+		{
+			cout << "Error in deletion1" << endl;
+		}
+	}
+
+	sql = "Delete from Plans where p_id = ";
+	sql = sql + to_string(p_id);
+	sql = sql + ";";
+	sqlite3_stmt* mystatement1;
+	int statusofPrep1 = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement1, NULL);
+	if (statusofPrep1 == SQLITE_OK)
+	{
+
+		if (!executeQueryNoResultsBack(mystatement1))
+		{
+			cout << "Error in deltion2" << endl;
+		}
+	}
+
+}
+
+void AdvisingDBAbstraction::deletePlanHalfTheJob(int p_id)
+{
+
+	string sql = "Delete from Plans where p_id = ";
+	sql = sql + to_string(p_id);
+	sql = sql + ";";
+	sqlite3_stmt* mystatement1;
+	int statusofPrep1 = sqlite3_prepare_v2(db, sql.c_str(), -1, &mystatement1, NULL);
+	if (statusofPrep1 == SQLITE_OK)
+	{
+
+		if (!executeQueryNoResultsBack(mystatement1))
+		{
+			cout << "Error in deltion2" << endl;
+		}
+	}
+
+}

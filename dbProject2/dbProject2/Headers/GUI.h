@@ -17,9 +17,15 @@ public:
 
 	bool addAStudent(AdvisingDBAbstraction &adb);
 
+	bool addAStudent(AdvisingDBAbstraction &adb, int st_id, string fname, string lname);
+
 	bool addACourse(AdvisingDBAbstraction &adb);
 
+	bool addACourse(AdvisingDBAbstraction &adb, int c_id, string cname, string cnumber, int crednum, int req, int prereq1, int prereq2);
+
 	bool addAAdvisor(AdvisingDBAbstraction &adb);
+
+	bool addAAdvisor(AdvisingDBAbstraction &adb, int ad_id, string fname, string lname);
 
 	bool listStudents(AdvisingDBAbstraction &adb);
 
@@ -31,8 +37,10 @@ public:
 
 	bool makeAPlan(AdvisingDBAbstraction &adb);
 
-	bool listAllExistingPlansByName(AdvisingDBAbstraction &adb);
+	bool makeAPlan(AdvisingDBAbstraction &adb, string name, int year, int semester, int p_id, int ad_id, int st_id, int course1, int course2, int course3, int course4);
 
+	bool listAllExistingPlansByName(AdvisingDBAbstraction &adb);
+	
 	string printLoginScreen();
 
 	void printAdvisorChoices(string tempPotatoe);

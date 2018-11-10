@@ -23,6 +23,7 @@ protected:
 	void createCoursesMakeUpPlansTable();
 	void createStudentsHaveTakenCourses();
 	void createCoursesHavePrerequisites();
+	void indexPlansTable();
 #pragma endregion
 
 #pragma region inserts
@@ -42,9 +43,25 @@ protected:
 #pragma region gets
 	void listStudents();
 	void listPlans();
+	void listPlans(int p_id);
 	void listCourses();
+	void listCoursesAStudentCanTake(int st_id);
 	void listAdvisors();
 
+#pragma endregion
+
+#pragma region ConvertingStuff
+	void convertPlanToCourses(int p_id, int st_id);
+	int getCourseIDsFromPlan(int p_id);
+	void deleteCourseFromPlan(int p_id, int c_id);
+#pragma endregion
+
+
+
+
+#pragma region Destroys
+	void deletePlan(int p_id);
+	void deletePlanHalfTheJob(int p_id);
 #pragma endregion
 
 	
